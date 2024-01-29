@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  frontend:
+    container_name: CWC-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    env_file:
+      - ./frontend/.env
+  ts-backend:
+    container_name: CWC-backend
+    build:
+      context: ./backend/typescript
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/typescript:/app
+      - /app/node_modules
+    ports:
+      - 8080:8080
+    dns:
+      - 8.8.8.8
+    env_file:
+      - ./.env
+
