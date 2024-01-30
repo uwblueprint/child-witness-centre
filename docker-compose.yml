@@ -18,10 +18,10 @@ services:
   ts-backend:
     container_name: CWC-backend
     build:
-      context: ./backend/typescript
+      context: ./backend
       dockerfile: Dockerfile
     volumes:
-      - ./backend/typescript:/app
+      - ./backend:/app
       - /app/node_modules
     ports:
       - 8080:8080
