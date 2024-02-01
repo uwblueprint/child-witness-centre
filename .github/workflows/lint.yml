@@ -48,9 +48,9 @@ jobs:
       - name: Lint frontend
         if: steps.changes.outputs.frontend == 'true'
         working-directory: ./frontend
-        run: yarn fix 
+        run: yarn lint 
 
       - name: Lint TypeScript backend
         if: steps.changes.outputs.typescript-backend == 'true'
         working-directory: ./backend
-        run: yarn fix 
+        run: yarn lint 
