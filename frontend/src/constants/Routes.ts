@@ -18,7 +18,4 @@ export const CREATE_SIMPLE_ENTITY_PAGE = "/simpleEntity/create";
 
 export const UPDATE_SIMPLE_ENTITY_PAGE = "/simpleEntity/update";
 
-
-
-
 export const HOOKS_PAGE = "/hooks";
