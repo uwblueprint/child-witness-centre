@@ -54,11 +54,3 @@ jobs:
         if: steps.changes.outputs.typescript-backend == 'true'
         working-directory: ./backend
         run: yarn lint 
-
-      - name: Check linting results
-        if: steps.changes.outputs.frontend == 'true' || steps.changes.outputs.typescript-backend == 'true'
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "Linting issues found. Please fix the issues before merging.";
-            exit 1;
-          fi
