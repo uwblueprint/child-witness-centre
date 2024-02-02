@@ -50,7 +50,7 @@ const authLink = setContext(async (_, { headers }) => {
         { withCredentials: true },
       );
 
-      const accessToken: string = data.data.refresh;
+      const accessToken: string = data?.refresh;
       setLocalStorageObjProperty(
         AUTHENTICATED_USER_KEY,
         "accessToken",
