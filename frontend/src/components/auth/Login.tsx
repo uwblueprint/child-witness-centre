@@ -32,6 +32,15 @@ const Login = (): React.ReactElement => {
     LOGIN_WITH_GOOGLE,
   );
 
+  const { data } = useQuery(IS_VERIFIED, {
+    skip: authenticatedUser === null,
+    variables: {
+      accessToken: authenticatedUser?.accessToken,
+      email: authenticatedUser?.email
+    }
+  });
+  const isVerified = data?.isVerified;
+
   const onLogInClick = async () => {
     const user: AuthenticatedUser = await authAPIClient.login(
       email,
@@ -53,7 +62,7 @@ const Login = (): React.ReactElement => {
     setAuthenticatedUser(user);
   };
 
-  if (authenticatedUser) {
+  if (authenticatedUser && isVerified) {
     return <Redirect to={HOME_PAGE} />;
   }
 

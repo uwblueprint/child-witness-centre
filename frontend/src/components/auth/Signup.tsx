@@ -18,6 +18,15 @@ const Signup = (): React.ReactElement => {
 
   const [register] = useMutation<{ register: AuthenticatedUser }>(REGISTER);
 
+  const { data } = useQuery(IS_VERIFIED, {
+    skip: authenticatedUser === null,
+    variables: {
+      accessToken: authenticatedUser?.accessToken,
+      email: authenticatedUser?.email
+    }
+  });
+  const isVerified = data?.isVerified;
+
   const onSignupClick = async () => {
     const user: AuthenticatedUser = await authAPIClient.register(
       firstName,
@@ -29,7 +38,7 @@ const Signup = (): React.ReactElement => {
     setAuthenticatedUser(user);
   };
 
-  if (authenticatedUser) {
+  if (authenticatedUser && isVerified) {
     return <Redirect to={HOME_PAGE} />;
   }
 

@@ -25,6 +25,10 @@ const authType = gql`
     logout(userId: ID!): ID
     resetPassword(email: String!): Boolean!
   }
+
+  extend type Query {
+    isVerified(accessToken: String!, email: String!): Boolean!
+  }
 `;
 
 export default authType;
