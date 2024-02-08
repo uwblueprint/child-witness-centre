@@ -36,8 +36,8 @@ const Login = (): React.ReactElement => {
     skip: authenticatedUser === null,
     variables: {
       accessToken: authenticatedUser?.accessToken,
-      email: authenticatedUser?.email
-    }
+      email: authenticatedUser?.email,
+    },
   });
   const isVerified = data?.isVerified;
 

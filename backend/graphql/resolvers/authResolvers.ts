@@ -82,9 +82,9 @@ const authResolvers = {
   Query: {
     isVerified: async (
       _parent: undefined,
-      { accessToken, email }: { accessToken: string, email: string },
+      { accessToken, email }: { accessToken: string; email: string },
     ): Promise<boolean> => {
-      return await authService.isAuthorizedByEmail(accessToken, email);
+      return authService.isAuthorizedByEmail(accessToken, email);
     },
   },
 };
