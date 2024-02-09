@@ -6,8 +6,8 @@ import authAPIClient from "../../APIClients/AuthAPIClient";
 import { HOME_PAGE } from "../../constants/Routes";
 import AuthContext from "../../contexts/AuthContext";
 import { AuthenticatedUser } from "../../types/AuthTypes";
-import { REGISTER } from "../../graphql/mutations";
-import { IS_VERIFIED } from "../../graphql/queries";
+import { REGISTER } from "../../graphql/Mutations";
+import { IS_VERIFIED } from "../../graphql/Queries";
 
 const Signup = (): React.ReactElement => {
   const { authenticatedUser, setAuthenticatedUser } = useContext(AuthContext);

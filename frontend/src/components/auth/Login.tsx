@@ -11,8 +11,8 @@ import authAPIClient from "../../APIClients/AuthAPIClient";
 import { HOME_PAGE, SIGNUP_PAGE } from "../../constants/Routes";
 import AuthContext from "../../contexts/AuthContext";
 import { AuthenticatedUser } from "../../types/AuthTypes";
-import { LOGIN, LOGIN_WITH_GOOGLE } from "../../graphql/mutations";
-import { IS_VERIFIED } from "../../graphql/queries";
+import { LOGIN, LOGIN_WITH_GOOGLE } from "../../graphql/Mutations";
+import { IS_VERIFIED } from "../../graphql/Queries";
 
 type GoogleResponse = GoogleLoginResponse | GoogleLoginResponseOffline;
 
