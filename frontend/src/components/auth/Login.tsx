@@ -42,6 +42,11 @@ const Login = (): React.ReactElement => {
   const isVerified = data?.isVerified;
 
   const onLogInClick = async () => {
+    if (!isVerified) {
+      window.alert(
+        "Failed to log in. Please check your email for a link to verify your account.",
+      );
+    }
     const user: AuthenticatedUser = await authAPIClient.login(
       email,
       password,
