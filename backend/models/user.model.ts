@@ -1,13 +1,16 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-import { Role } from "../types";
+import { Role, LocationType } from "../types";
 
 export interface User extends Document {
   id: string;
   firstName: string;
   lastName: string;
-  authId: string;
-  role: Role;
+  startDate: Date;
+  birthday: Date;
+  userGroup: Role;
+  locationType: LocationType;
+  headshot: string;
 }
 
 const UserSchema: Schema = new Schema({
@@ -19,15 +22,28 @@ const UserSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  authId: {
-    type: String,
+  startDate: {
+    type: Date,
     required: true,
   },
-  role: {
+  birthday: {
+    type: Date,
+    required: true,
+  },
+  userGroup: {
     type: String,
     required: true,
-    enum: ["User", "Admin"],
+    enum: ["Employee", "Volunteer", "Admin"]
   },
+  locationType: {
+    type: String,
+    required: true,
+    enum: ["Remote", "Hybrid", "In-Person"]
+  },
+  headshot: {
+    type: String,
+    required: true
+  }
 });
 
 export default mongoose.model<User>("User", UserSchema);

@@ -2,31 +2,50 @@ import { gql } from "apollo-server-express";
 
 const userType = gql`
   enum Role {
-    User
+    Employee
+    Volunteer
     Admin
+  }
+
+  enum LocationType {
+    Remote
+    Hybrid
+    In-Person
   }
 
   type UserDTO {
     id: ID!
     firstName: String!
     lastName: String!
+    startDate: Date!
+    birthday: Date!
+    userGroup: Role!
+    locationType: LocationType!
+    headshot: String!
     email: String!
-    role: Role!
   }
 
   input CreateUserDTO {
     firstName: String!
     lastName: String!
+    startDate: Date!
+    birthday: Date!
+    userGroup: Role!
+    locationType: LocationType!
+    headshot: String!
     email: String!
-    role: Role!
     password: String!
   }
 
   input UpdateUserDTO {
     firstName: String!
     lastName: String!
+    startDate: Date!
+    birthday: Date!
+    userGroup: Role!
+    locationType: LocationType!
+    headshot: String!
     email: String!
-    role: Role!
   }
 
   extend type Query {
