@@ -203,7 +203,7 @@ class AuthService implements IAuthService {
 
       return (
         // firebaseUser.emailVerified && String(tokenUserId) === requestedUserId
-        tokenUserId === requestedUserId
+        String(tokenUserId) === requestedUserId
       );
     } catch (error) {
       return false;
