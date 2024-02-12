@@ -205,7 +205,7 @@ class UserService implements IUserService {
       // must explicitly specify runValidators when updating through findByIdAndUpdate
       oldUser = await MgUser.findByIdAndUpdate(
         userId,
-        { firstName: user.firstName, lastName: user.lastName, role: user.role },
+        { firstName: user.firstName, lastName: user.lastName },
         { runValidators: true },
       );
 
@@ -225,7 +225,6 @@ class UserService implements IUserService {
             {
               firstName: oldUser.firstName,
               lastName: oldUser.lastName,
-              role: oldUser.role,
             },
             { runValidators: true },
           );
@@ -251,7 +250,7 @@ class UserService implements IUserService {
       firstName: user.firstName,
       lastName: user.lastName,
       email: updatedFirebaseUser.email ?? "",
-      role: user.role,
+      role: oldUser.role,
     };
   }
 
