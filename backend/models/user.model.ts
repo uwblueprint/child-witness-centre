@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-import { Role, LocationType } from "../types";
+import { RoleType, LocationType } from "../types";
 
 export interface User extends Document {
   id: string;
@@ -8,7 +8,7 @@ export interface User extends Document {
   lastName: string;
   startDate: Date;
   birthday: Date;
-  userGroup: Role;
+  userGroup: RoleType;
   locationType: LocationType;
   headshot: string;
 }
