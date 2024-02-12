@@ -2,8 +2,8 @@ import { gql } from "apollo-server-express";
 
 const userType = gql`
   enum Role {
-    Employee
     Volunteer
+    Staff
     Admin
   }
 
@@ -17,35 +17,35 @@ const userType = gql`
     id: ID!
     firstName: String!
     lastName: String!
+    email: String!
     startDate: Date!
     birthday: Date!
     role: Role!
     locationType: LocationType!
     headshot: String!
-    email: String!
   }
 
   input CreateUserDTO {
     firstName: String!
     lastName: String!
+    email: String!
     startDate: Date!
     birthday: Date!
     role: Role!
     locationType: LocationType!
     headshot: String!
-    email: String!
     password: String!
   }
 
   input UpdateUserDTO {
     firstName: String!
     lastName: String!
+    email: String!
     startDate: Date!
     birthday: Date!
     role: Role!
     locationType: LocationType!
     headshot: String!
-    email: String!
   }
 
   extend type Query {

@@ -1,4 +1,4 @@
-export type Role = "Employee" | "Volunteer" | "Admin";
+export type Role = "Volunteer" | "Staff" | "Admin";
 
 export type LocationType = "Remote" | "Hybrid" | "In-Person"
 
