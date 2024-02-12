@@ -1,14 +1,15 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-import { RoleType, LocationType } from "../types";
+import { Role, LocationType } from "../types";
 
 export interface User extends Document {
   id: string;
   firstName: string;
   lastName: string;
+  authId: string;
+  role: Role;
   startDate: Date;
   birthday: Date;
-  userGroup: RoleType;
   locationType: LocationType;
   headshot: string;
 }
@@ -22,6 +23,15 @@ const UserSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  authId: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    required: true,
+    enum: ["Employee", "Volunteer", "Admin"]
+  },
   startDate: {
     type: Date,
     required: true,
@@ -29,11 +39,6 @@ const UserSchema: Schema = new Schema({
   birthday: {
     type: Date,
     required: true,
-  },
-  userGroup: {
-    type: String,
-    required: true,
-    enum: ["Employee", "Volunteer", "Admin"]
   },
   locationType: {
     type: String,

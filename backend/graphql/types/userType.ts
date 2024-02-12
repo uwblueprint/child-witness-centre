@@ -19,7 +19,7 @@ const userType = gql`
     lastName: String!
     startDate: Date!
     birthday: Date!
-    userGroup: Role!
+    role: Role!
     locationType: LocationType!
     headshot: String!
     email: String!
@@ -30,7 +30,7 @@ const userType = gql`
     lastName: String!
     startDate: Date!
     birthday: Date!
-    userGroup: Role!
+    role: Role!
     locationType: LocationType!
     headshot: String!
     email: String!
@@ -42,7 +42,7 @@ const userType = gql`
     lastName: String!
     startDate: Date!
     birthday: Date!
-    userGroup: Role!
+    role: Role!
     locationType: LocationType!
     headshot: String!
     email: String!
