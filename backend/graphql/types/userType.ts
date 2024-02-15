@@ -2,7 +2,8 @@ import { gql } from "apollo-server-express";
 
 const userType = gql`
   enum Role {
-    User
+    Volunteer
+    Staff
     Admin
   }
 
