@@ -1,9 +1,11 @@
+import { UserRole } from "./UserTypes";
+
 export type AuthenticatedUser = {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
-  role: "Volunteer" | "Staff" | "Admin";
+  role: UserRole;
   accessToken: string;
 } | null;
 
