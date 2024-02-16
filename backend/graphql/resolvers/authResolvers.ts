@@ -79,6 +79,14 @@ const authResolvers = {
       return true;
     },
   },
+  Query: {
+    isVerified: async (
+      _parent: undefined,
+      { accessToken, email }: { accessToken: string; email: string },
+    ): Promise<boolean> => {
+      return authService.isAuthorizedByEmail(accessToken, email);
+    },
+  },
 };
 
 export default authResolvers;
