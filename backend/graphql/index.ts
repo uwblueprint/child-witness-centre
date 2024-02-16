@@ -14,7 +14,7 @@ import entityType from "./types/entityType";
 import simpleEntityResolvers from "./resolvers/simpleEntityResolvers";
 import simpleEntityType from "./types/simpleEntityType";
 import userResolvers from "./resolvers/userResolvers";
-import userType from "./types/userType";
+import { userType, dateResolver } from "./types/userType";
 
 const query = gql`
   type Query {
@@ -35,6 +35,7 @@ const executableSchema = makeExecutableSchema({
     entityResolvers,
     simpleEntityResolvers,
     userResolvers,
+    dateResolver,
   ),
 });
 

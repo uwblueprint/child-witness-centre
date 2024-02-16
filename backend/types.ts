@@ -1,6 +1,6 @@
 export type Role = "Volunteer" | "Staff" | "Admin";
 
-export type LocationType = "Remote" | "Hybrid" | "In-Person"
+export type LocationType = "Remote" | "Hybrid" | "In Person"
 
 export type Token = {
   accessToken: string;
@@ -13,10 +13,10 @@ export type UserDTO = {
   lastName: string;
   email: string;
   role: Role;
-  startDate: Date;
-  birthday: Date;
-  locationType: LocationType;
-  headshot: string;
+  startDate?: Date;
+  birthday?: Date;
+  locationType?: LocationType;
+  headshot?: string;
 };
 
 export type CreateUserDTO = Omit<UserDTO, "id"> & { password: string };
