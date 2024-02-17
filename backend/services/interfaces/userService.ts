@@ -79,6 +79,14 @@ interface IUserService {
   updateUserById(userId: string, user: UpdateUserDTO): Promise<UserDTO>;
 
   /**
+   * Update a  user's role - only accessible by Admin.
+   * @param userId user's id
+   * @param role the new role for the user
+   * @throws Error if role update fails
+   */
+  updateUserRoleById(userId: string, role: string): void | PromiseLike<void>;
+
+  /**
    * Delete a user by id
    * @param userId user's userId
    * @throws Error if user deletion fails
