@@ -13,6 +13,7 @@ import AuthContext from "../../contexts/AuthContext";
 import { AuthenticatedUser } from "../../types/AuthTypes";
 import { LOGIN, LOGIN_WITH_GOOGLE } from "../../graphql/Mutations";
 import { IS_VERIFIED } from "../../graphql/Queries";
+import { Button } from "@chakra-ui/react";
 
 type GoogleResponse = GoogleLoginResponse | GoogleLoginResponseOffline;
 
@@ -74,6 +75,7 @@ const Login = (): React.ReactElement => {
   return (
     <div style={{ textAlign: "center" }}>
       <h1>Login</h1>
+      <Button colorScheme='blue'></Button>
       <form>
         <div>
           <input
