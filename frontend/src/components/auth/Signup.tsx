@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
