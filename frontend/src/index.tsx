@@ -1,11 +1,12 @@
 import axios from "axios";
-import jwt from "jsonwebtoken";
+import { jwtDecode } from "jwt-decode";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import { setContext } from "@apollo/client/link/context";
 
+import { ChakraProvider } from "@chakra-ui/react";
 import AUTHENTICATED_USER_KEY from "./constants/AuthConstants";
 import { AuthenticatedUser, DecodedJWT } from "./types/AuthTypes";
 import {
@@ -16,7 +17,6 @@ import {
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ChakraProvider } from "@chakra-ui/react";
 
 const REFRESH_MUTATION = `
   mutation Index_Refresh {
@@ -37,7 +37,7 @@ const authLink = setContext(async (_, { headers }) => {
   >(AUTHENTICATED_USER_KEY, "accessToken");
 
   if (token) {
-    const decodedToken = jwt.decode(token) as DecodedJWT;
+    const decodedToken = jwtDecode(token) as DecodedJWT;
 
     // refresh if decodedToken has expired
     if (
@@ -75,15 +75,16 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("root") as HTMLElement);
+
+root.render(
   <React.StrictMode>
-    <ApolloProvider client={apolloClient}>
-      <ChakraProvider>
+    <ChakraProvider>
+      <ApolloProvider client={apolloClient}>
         <App />
-      </ChakraProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </ChakraProvider>
   </React.StrictMode>,
-  document.getElementById("root"),
 );
 
 // If you want to start measuring performance in your app, pass a function
