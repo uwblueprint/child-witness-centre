@@ -22,31 +22,18 @@ const taskType = gql`
     title: String!
     description: String
     requiresApproval: Boolean!
-    status: TaskStatus!
     document: String
     dueDate: Date
     expiry: Date
   }
 
-  input UpdateTaskDTO {
-    title: String!
-    description: String
-    requiresApproval: Boolean!
-    status: TaskStatus!
-    document: String
-    dueDate: Date
-    expiry: Date
-  }
-
-  extend type Query {
-    taskById(id: ID!): TaskDTO!
-    tasks: [taskDTO!]!
+  input DeleteTaskDTO {
+    id: ID!
   }
 
   extend type Mutation {
-    createTask(task: CreateTaskDTO!): TaskDTO!
-    updateTask(id: ID!, task: UpdateTaskDTO!): TaskDTO!
-    deleteTask(id: ID!): ID
+    createTask(input: CreateTaskInput!): Task!
+    deleteTask(input: DeleteTaskInput!): Boolean!
   }
 `;
 

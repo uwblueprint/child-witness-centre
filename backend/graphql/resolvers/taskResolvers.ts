@@ -1,19 +1,19 @@
+import { TaskDTO, CreateTaskDTO, UpdateTaskDTO } from "../../types";
 import TaskService from "../../services/implementations/taskService";
-import ITaskService from "../../services/interfaces/taskService";
-import { CreateTaskDTO, UpdateTaskDTO, TaskDTO } from "../../types";
+import { ITaskService } from "../../services/interfaces/taskService";
 
 const taskService: ITaskService = new TaskService();
 
-const userResolvers = {
+const taskResolvers = {
   Query: {
-    taskById: async (
+    task: async (
       _parent: undefined,
       { id }: { id: string },
     ): Promise<TaskDTO> => {
       return taskService.getTaskById(id);
     },
     tasks: async (): Promise<TaskDTO[]> => {
-      return taskService.getTask();
+      return taskService.getTasks();
     },
   },
   Mutation: {
@@ -21,8 +21,7 @@ const userResolvers = {
       _parent: undefined,
       { task }: { task: CreateTaskDTO },
     ): Promise<TaskDTO> => {
-      const newTask = await taskService.createTask(task);
-      return newTask;
+      return taskService.createTask(task);
     },
     updateTask: async (
       _parent: undefined,
@@ -34,9 +33,9 @@ const userResolvers = {
       _parent: undefined,
       { id }: { id: string },
     ): Promise<void> => {
-      return taskService.deleteTask(id);
+      return taskService.deleteTaskById(id);
     },
   },
 };
 
-export default userResolvers;
+export default taskResolvers;
