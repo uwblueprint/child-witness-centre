@@ -4,7 +4,7 @@ import { CreateTaskDTO, UpdateTaskDTO, TaskDTO } from "../../types";
 
 const taskService: ITaskService = new TaskService();
 
-const userResolvers = {
+const taskResolvers = {
   Query: {
     taskById: async (
       _parent: undefined,
@@ -13,7 +13,7 @@ const userResolvers = {
       return taskService.getTaskById(id);
     },
     tasks: async (): Promise<TaskDTO[]> => {
-      return taskService.getTask();
+      return taskService.getTasks();
     },
   },
   Mutation: {
@@ -39,4 +39,4 @@ const userResolvers = {
   },
 };
 
-export default userResolvers;
+export default taskResolvers;
