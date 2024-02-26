@@ -8,6 +8,7 @@ export enum TaskStatus {
 }
 
 export interface Task extends Document {
+  id: string;
   title: string;
   description?: string;
   requiresApproval: boolean;
