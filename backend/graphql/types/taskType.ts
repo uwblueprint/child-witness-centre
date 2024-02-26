@@ -38,18 +38,15 @@ const taskType = gql`
     expiry: Date
   }
 
-  input DeleteTaskDTO {
-    id: ID!
-  }
-
   extend type Query {
     taskById(id: ID!): TaskDTO!
     tasks: [taskDTO!]!
   }
 
   extend type Mutation {
-    createTask(input: CreateTaskInput!): Task!
-    deleteTask(input: DeleteTaskInput!): Boolean!
+    createTask(task: CreateTaskDTO!): TaskDTO!
+    updateTask(id: ID!, task: UpdateTaskDTO!): TaskDTO!
+    deleteTask(id: ID!): ID
   }
 `;
 
