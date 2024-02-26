@@ -1,4 +1,3 @@
-// TaskModel.ts
 import mongoose, { Schema, Document } from "mongoose";
 
 export enum TaskStatus {

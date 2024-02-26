@@ -1,6 +1,6 @@
 import { TaskDTO, CreateTaskDTO, UpdateTaskDTO } from "../../types";
 import TaskService from "../../services/implementations/taskService";
-import { ITaskService } from "../../services/interfaces/taskService";
+import ITaskService from "../../services/interfaces/taskService";
 
 const taskService: ITaskService = new TaskService();
 

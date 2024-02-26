@@ -1,3 +1,4 @@
+// task interface
 import { CreateTaskDTO, UpdateTaskDTO, TaskDTO } from "../../types";
 
 interface ITaskService {
@@ -33,7 +34,7 @@ interface ITaskService {
    */
   updateTaskById(id: string, task: UpdateTaskDTO): Promise<TaskDTO>;
 
-  /**  
+  /**
    * Delete a task by id
    * @param id task's id
    * @throws Error if task deletion fails
