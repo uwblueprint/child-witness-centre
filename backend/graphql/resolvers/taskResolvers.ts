@@ -1,59 +1,40 @@
-import UserService from "../../services/implementations/userService";
-import IUserService from "../../services/interfaces/userService";
-import { CreateUserDTO, UpdateUserDTO, UserDTO } from "../../types";
-import { generateCSV } from "../../utilities/CSVUtils";
+import TaskService from "../../services/implementations/taskService";
+import ITaskService from "../../services/interfaces/taskService";
+import { CreateTaskDTO, UpdateTaskDTO, TaskDTO } from "../../types";
 
 const taskService: ITaskService = new TaskService();
 
 const userResolvers = {
   Query: {
-    userById: async (
+    taskById: async (
       _parent: undefined,
       { id }: { id: string },
-    ): Promise<UserDTO> => {
-      return userService.getUserById(id);
+    ): Promise<TaskDTO> => {
+      return taskService.getTaskById(id);
     },
-    userByEmail: async (
-      _parent: undefined,
-      { email }: { email: string },
-    ): Promise<UserDTO> => {
-      return userService.getUserByEmail(email);
-    },
-    users: async (): Promise<UserDTO[]> => {
-      return userService.getUsers();
-    },
-    usersCSV: async (): Promise<string> => {
-      const users = await userService.getUsers();
-      const csv = await generateCSV<UserDTO>({ data: users });
-      return csv;
+    tasks: async (): Promise<TaskDTO[]> => {
+      return taskService.getTask();
     },
   },
   Mutation: {
-    createUser: async (
+    createTask: async (
       _parent: undefined,
-      { user }: { user: CreateUserDTO },
-    ): Promise<UserDTO> => {
-      const newUser = await userService.createUser(user);
-      await authService.sendEmailVerificationLink(newUser.email);
-      return newUser;
+      { task }: { task: CreateTaskDTO },
+    ): Promise<TaskDTO> => {
+      const newTask = await taskService.createTask(task);
+      return newTask;
     },
-    updateUser: async (
+    updateTask: async (
       _parent: undefined,
-      { id, user }: { id: string; user: UpdateUserDTO },
-    ): Promise<UserDTO> => {
-      return userService.updateUserById(id, user);
+      { id, task }: { id: string; task: UpdateTaskDTO },
+    ): Promise<TaskDTO> => {
+      return taskService.updateTaskById(id, task);
     },
-    deleteUserById: async (
+    deleteTask: async (
       _parent: undefined,
       { id }: { id: string },
     ): Promise<void> => {
-      return userService.deleteUserById(id);
-    },
-    deleteUserByEmail: async (
-      _parent: undefined,
-      { email }: { email: string },
-    ): Promise<void> => {
-      return userService.deleteUserByEmail(email);
+      return taskService.deleteTask(id);
     },
   },
 };
