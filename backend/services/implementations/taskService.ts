@@ -1,20 +1,10 @@
-import * as firebaseAdmin "firebase-admin";
-
-import ITaskService from "../interfacestaskService";
+import ITaskService from "../interfaces/taskService";
 import MgTask, { Task } from "../../models/task.model";
 import { CreateTaskDTO, TaskDTO, UpdateTaskDTO } from "../../types";
 import { getErrorMessage } from "../../utilities/errorUtils";
 import logger from "../../utilities/logger";
 
 const Logger = logger(__filename);
-
-const getMongoTaskById = async (taskId: string): Promise<Task> => {
-  const task: Task | null = await MgTask.findById(taskId);
-  if (!task) {
-    throw new Error(`task with id ${taskId} not found.`);
-  }
-  return task;
-};
 
 class TaskService implements ITaskService {
   /* eslint-disable class-methods-use-this */
@@ -56,49 +46,64 @@ class TaskService implements ITaskService {
         expiry: task.expiry,
       }));
     } catch (error: unknown) {
-      Logger.error(
-        `Failed to get tasks. Reason = ${getErrorMessage(error)}`,
-      );
+      Logger.error(`Failed to get tasks. Reason = ${getErrorMessage(error)}`);
       throw error;
     }
   }
 
-  async createTask(
-    task: CreateTaskDTO,
-  ): Promise<TaskDTO> {
-    let newTask: Task | null;
+  async createTask(task: CreateTaskDTO): Promise<TaskDTO> {
+    let newTask: Task;
     try {
       newTask = await MgTask.create(task);
-      if (newTask) {
-        return {
-            id: newTask.id,
-            title: newTask.title,
-            description: task.description,
-            requiresApproval: task.requiresApproval,
-            status: task.status,
-            document: task.document,
-            dueDate: task.dueDate,
-            expiry: task.expiry,
-        };
-      }
     } catch (error: unknown) {
-      Logger.error(
-        `Failed to create task. Reason = ${getErrorMessage(error)}`,
-      );
+      Logger.error(`Failed to create task. Reason = ${getErrorMessage(error)}`);
       throw error;
     }
+    return {
+      id: newTask.id,
+      title: newTask.title,
+      description: newTask.description,
+      requiresApproval: newTask.requiresApproval,
+      status: newTask.status,
+      document: newTask.document,
+      dueDate: newTask.dueDate,
+      expiry: newTask.expiry,
+    };
   }
 
-  async deleteTask(taskId: string): Promise<void> {
+  async updateTaskById(id: string, task: UpdateTaskDTO): Promise<TaskDTO> {
+    let updatedTask: Task | null;
     try {
-      const task = await getMongoTaskById(taskId);
-
-      if (!task) {
-        throw new Error(`taskId ${taskId} not found.`);
+      updatedTask = await MgTask.findByIdAndUpdate(id, task, {
+        new: true,
+        runValidators: true,
+      });
+      if (!updatedTask) {
+        throw new Error(`Task id ${id} not found`);
       }
+    } catch (error: unknown) {
+      Logger.error(`Failed to update task. Reason = ${getErrorMessage(error)}`);
+      throw error;
+    }
+    return {
+      id: updatedTask.id,
+      title: updatedTask.title,
+      description: updatedTask.description,
+      requiresApproval: updatedTask.requiresApproval,
+      status: updatedTask.status,
+      document: updatedTask.document,
+      dueDate: updatedTask.dueDate,
+      expiry: updatedTask.expiry,
+    };
+  }
 
-      await MgTask.findByIdAndDelete(taskId);
-
+  async deleteTask(id: string): Promise<string> {
+    try {
+      const deletedTask: Task | null = await MgTask.findByIdAndDelete(id);
+      if (!deletedTask) {
+        throw new Error(`Task id ${id} not found`);
+      }
+      return id;
     } catch (error: unknown) {
       Logger.error(`Failed to delete task. Reason = ${getErrorMessage(error)}`);
       throw error;
