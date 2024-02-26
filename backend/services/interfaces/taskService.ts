@@ -1,3 +1,4 @@
+// task interface
 import { CreateTaskDTO, UpdateTaskDTO, TaskDTO } from "../../types";
 
 interface ITaskService {
