@@ -27,10 +27,10 @@ export type TaskDTO = {
   description?: string;
   requiresApproval: boolean;
   status: TaskStatus;
-  document?: string
-  dueDate?: Date
-  expiry?: Date
-}
+  document?: string;
+  dueDate?: Date;
+  expiry?: Date;
+};
 
 export type CreateTaskDTO = Omit<TaskDTO, "id">;
 
