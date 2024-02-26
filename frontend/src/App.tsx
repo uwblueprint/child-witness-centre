@@ -45,12 +45,6 @@ const App = (): React.ReactElement => {
     DEFAULT_SAMPLE_CONTEXT,
   );
 
-  const allRoles = new Set([
-    UserRole.ADMIN,
-    UserRole.STAFF,
-    UserRole.VOLUNTEER,
-  ]);
-
   return (
     <SampleContext.Provider value={sampleContext}>
       <SampleContextDispatcherContext.Provider
@@ -63,23 +57,16 @@ const App = (): React.ReactElement => {
             <Switch>
               <Route exact path={Routes.LOGIN_PAGE} component={Login} />
               <Route exact path={Routes.SIGNUP_PAGE} component={Signup} />
-              <PrivateRoute
-                exact
-                path={Routes.HOME_PAGE}
-                component={Default}
-                allowedRoles={allRoles}
-              />
+              <PrivateRoute exact path={Routes.HOME_PAGE} component={Default} />
               <PrivateRoute
                 exact
                 path={Routes.CREATE_ENTITY_PAGE}
                 component={CreatePage}
-                allowedRoles={allRoles}
               />
               <PrivateRoute
                 exact
                 path={Routes.UPDATE_ENTITY_PAGE}
                 component={UpdatePage}
-                allowedRoles={allRoles}
               />
               <PrivateRoute
                 exact
@@ -91,31 +78,27 @@ const App = (): React.ReactElement => {
                 exact
                 path={Routes.CREATE_SIMPLE_ENTITY_PAGE}
                 component={SimpleEntityCreatePage}
-                allowedRoles={new Set([UserRole.STAFF])}
+                allowedRoles={new Set([UserRole.ADMIN])}
               />
               <PrivateRoute
                 exact
                 path={Routes.UPDATE_SIMPLE_ENTITY_PAGE}
                 component={SimpleEntityUpdatePage}
-                allowedRoles={allRoles}
               />
               <PrivateRoute
                 exact
                 path={Routes.DISPLAY_SIMPLE_ENTITY_PAGE}
                 component={SimpleEntityDisplayPage}
-                allowedRoles={allRoles}
               />
               <PrivateRoute
                 exact
                 path={Routes.EDIT_TEAM_PAGE}
                 component={EditTeamInfoPage}
-                allowedRoles={allRoles}
               />
               <PrivateRoute
                 exact
                 path={Routes.HOOKS_PAGE}
                 component={HooksDemo}
-                allowedRoles={allRoles}
               />
               <Route exact path="*" component={NotFound} />
             </Switch>

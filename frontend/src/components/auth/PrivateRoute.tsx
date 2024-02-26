@@ -9,7 +9,7 @@ type PrivateRouteProps = {
   component: React.FC;
   path: string;
   exact: boolean;
-  allowedRoles: Set<UserRole>;
+  allowedRoles?: Set<UserRole>; // if undefined, the default is all roles are allowed
 };
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({
@@ -19,13 +19,13 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   allowedRoles,
 }: PrivateRouteProps) => {
   const { authenticatedUser } = useContext(AuthContext);
-  const userHasAllowedRole = authenticatedUser
-    ? allowedRoles.has(authenticatedUser.role)
-    : false;
-
   if (!authenticatedUser) {
     return <Redirect to={LOGIN_PAGE} />;
   }
+
+  const userHasAllowedRole = allowedRoles
+    ? allowedRoles.has(authenticatedUser.role)
+    : true;
   if (!userHasAllowedRole) {
     alert(
       "You don't have permission to access this page. Redirecting to home page.",
