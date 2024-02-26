@@ -3,7 +3,7 @@ import IUserService from "../../services/interfaces/userService";
 import { CreateUserDTO, UpdateUserDTO, UserDTO } from "../../types";
 import { generateCSV } from "../../utilities/CSVUtils";
 
-const userService: IUserService = new UserService();
+const taskService: ITaskService = new TaskService();
 
 const userResolvers = {
   Query: {
