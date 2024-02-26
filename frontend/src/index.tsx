@@ -78,13 +78,11 @@ const apolloClient = new ApolloClient({
 const root = createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <ApolloProvider client={apolloClient}>
-        <App />
-      </ApolloProvider>
-    </ChakraProvider>
-  </React.StrictMode>,
+  <ChakraProvider>
+    <ApolloProvider client={apolloClient}>
+      <App />
+    </ApolloProvider>
+  </ChakraProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
