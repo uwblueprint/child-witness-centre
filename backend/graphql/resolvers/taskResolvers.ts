@@ -32,8 +32,8 @@ const taskResolvers = {
     deleteTask: async (
       _parent: undefined,
       { id }: { id: string },
-    ): Promise<void> => {
-      return taskService.deleteTaskById(id);
+    ): Promise<string> => {
+      return taskService.deleteTask(id);
     },
   },
 };
