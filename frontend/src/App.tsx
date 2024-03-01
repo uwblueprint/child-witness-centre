@@ -24,6 +24,7 @@ import sampleContextReducer from "./reducers/SampleContextReducer";
 import SampleContextDispatcherContext from "./contexts/SampleContextDispatcherContext";
 import EditTeamInfoPage from "./components/pages/EditTeamPage";
 import HooksDemo from "./components/pages/HooksDemo";
+import DocumentDirectory from "./components/pages/DocumentDirectory";
 
 import { AuthenticatedUser } from "./types/AuthTypes";
 import { UserRole } from "./types/UserTypes";
@@ -82,8 +83,9 @@ const App = (): React.ReactElement => {
               />
               <PrivateRoute
                 exact
-                path={Routes.UPDATE_SIMPLE_ENTITY_PAGE}
-                component={SimpleEntityUpdatePage}
+                path={Routes.DOCUMENT_DIRECTORY_PAGE}
+                component={DocumentDirectory}
+                allowedRoles={new Set([UserRole.ADMIN])}
               />
               <PrivateRoute
                 exact
