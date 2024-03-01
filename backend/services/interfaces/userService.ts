@@ -1,9 +1,4 @@
-import {
-  CreateUserDTO,
-  Role,
-  UpdateUserDTO,
-  UserDTO,
-} from "../../types";
+import { CreateUserDTO, Role, UpdateUserDTO, UserDTO } from "../../types";
 
 interface IUserService {
   /**
@@ -60,10 +55,7 @@ interface IUserService {
    * @returns a UserDTO with the created user's information
    * @throws Error if user creation fails
    */
-  createUser(
-    user: CreateUserDTO,
-    authId?: string,
-  ): Promise<UserDTO>;
+  createUser(user: CreateUserDTO, authId?: string): Promise<UserDTO>;
 
   /**
    * Update a user.
