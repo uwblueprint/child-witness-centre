@@ -140,10 +140,7 @@ class UserService implements IUserService {
     return userDtos;
   }
 
-  async createUser(
-    user: CreateUserDTO,
-    authId?: string,
-  ): Promise<UserDTO> {
+  async createUser(user: CreateUserDTO, authId?: string): Promise<UserDTO> {
     let newUser: User;
     let firebaseUser: firebaseAdmin.auth.UserRecord;
 
