@@ -1,6 +1,5 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import React from "react";
 import { createRoot } from "react-dom/client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
@@ -75,9 +74,7 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const root = createRoot(document.getElementById("root") as HTMLElement);
-
-root.render(
+createRoot(document.getElementById("root") as HTMLElement).render(
   <ChakraProvider>
     <ApolloProvider client={apolloClient}>
       <App />
