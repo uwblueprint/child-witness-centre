@@ -41,7 +41,6 @@ const TaskSchema: Schema = new Schema({
   },
   expiry: {
     type: Date,
-    required: true,
   },
 });
 
