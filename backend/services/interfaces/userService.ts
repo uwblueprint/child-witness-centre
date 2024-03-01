@@ -1,7 +1,6 @@
 import {
   CreateUserDTO,
   Role,
-  SignUpMethod,
   UpdateUserDTO,
   UserDTO,
 } from "../../types";
@@ -58,14 +57,12 @@ interface IUserService {
    * Create a user, email verification configurable
    * @param user the user to be created
    * @param authId the user's firebase auth id, optional
-   * @param signUpMethod the method user used to signup
    * @returns a UserDTO with the created user's information
    * @throws Error if user creation fails
    */
   createUser(
     user: CreateUserDTO,
     authId?: string,
-    signUpMethod?: SignUpMethod,
   ): Promise<UserDTO>;
 
   /**
