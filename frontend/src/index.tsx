@@ -1,4 +1,5 @@
 import axios from "axios";
+import React from "react";
 import { jwtDecode } from "jwt-decode";
 import { createRoot } from "react-dom/client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
