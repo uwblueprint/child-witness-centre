@@ -1,4 +1,3 @@
-
 import UserModel from "../../../models/user.model";
 import UserService from "../userService";
 
@@ -17,7 +16,7 @@ const testUsers = [
     firstName: "Wendy",
     lastName: "Darling",
     authId: "321",
-    role: "User",
+    role: "Admin",
   },
 ];
 
@@ -59,4 +58,3 @@ describe("mongo userService", (): void => {
     });
   });
 });
-
