@@ -102,6 +102,9 @@ const register = async (
     });
     user = result.data?.register ?? null;
     if (user) {
+      window.alert(
+        "Success! Please check your email for a link to verify your account.",
+      );
       localStorage.setItem(AUTHENTICATED_USER_KEY, JSON.stringify(user));
     }
   } catch (e: unknown) {
@@ -176,5 +179,3 @@ const refresh = async (refreshFunction: RefreshFunction): Promise<boolean> => {
 };
 
 export default { login, logout, loginWithGoogle, register, refresh };
-
-

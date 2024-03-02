@@ -34,4 +34,3 @@ const SimpleEntitySchema: Schema = new Schema({
 });
 
 export default model<SimpleEntity>("SimpleEntity", SimpleEntitySchema);
-

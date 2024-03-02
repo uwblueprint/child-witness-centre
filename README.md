@@ -49,15 +49,21 @@ docker compose up --build
 ## Linting & Formatting
 ### Mac
 ```bash
-docker exec -it CWC-backend /bin/bash -c "black ."
 docker exec -it CWC-backend /bin/bash -c "yarn fix"
 ```
+```bash
+docker exec -it CWC-frontend /bin/bash -c "yarn fix"
+```
+
 
 ### Windows
 ```bash
-docker exec -it CWC-backend bash -c "black ."
 docker exec -it CWC-backend bash -c "yarn fix"
 ```
+```bash
+docker exec -it CWC-frontend bash -c "yarn fix"
+```
+
 ## The Team
 ### Term 1 (W24):
 **Project Lead:** Owen Sellner<br>
