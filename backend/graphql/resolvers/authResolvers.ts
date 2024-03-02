@@ -46,7 +46,7 @@ const authResolvers = {
       { user }: { user: RegisterUserDTO },
       { res }: { res: Response },
     ): Promise<Omit<AuthDTO, "refreshToken">> => {
-      await userService.createUser({ ...user, role: "User" });
+      await userService.createUser({ ...user, role: "Volunteer" });
       const authDTO = await authService.generateToken(
         user.email,
         user.password,
@@ -77,6 +77,14 @@ const authResolvers = {
     ): Promise<boolean> => {
       await authService.resetPassword(email);
       return true;
+    },
+  },
+  Query: {
+    isVerified: async (
+      _parent: undefined,
+      { accessToken, email }: { accessToken: string; email: string },
+    ): Promise<boolean> => {
+      return authService.isAuthorizedByEmail(accessToken, email);
     },
   },
 };

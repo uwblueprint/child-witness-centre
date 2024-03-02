@@ -26,6 +26,7 @@ import EditTeamInfoPage from "./components/pages/EditTeamPage";
 import HooksDemo from "./components/pages/HooksDemo";
 
 import { AuthenticatedUser } from "./types/AuthTypes";
+import { UserRole } from "./types/UserTypes";
 
 const App = (): React.ReactElement => {
   const currentUser: AuthenticatedUser = getLocalStorageObj<AuthenticatedUser>(
@@ -71,11 +72,13 @@ const App = (): React.ReactElement => {
                 exact
                 path={Routes.DISPLAY_ENTITY_PAGE}
                 component={DisplayPage}
+                allowedRoles={new Set([UserRole.ADMIN])}
               />
               <PrivateRoute
                 exact
                 path={Routes.CREATE_SIMPLE_ENTITY_PAGE}
                 component={SimpleEntityCreatePage}
+                allowedRoles={new Set([UserRole.ADMIN])}
               />
               <PrivateRoute
                 exact

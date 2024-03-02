@@ -5,12 +5,14 @@ import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
 } from "react-google-login";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 import authAPIClient from "../../APIClients/AuthAPIClient";
 import { HOME_PAGE, SIGNUP_PAGE } from "../../constants/Routes";
 import AuthContext from "../../contexts/AuthContext";
 import { AuthenticatedUser } from "../../types/AuthTypes";
+import { LOGIN, LOGIN_WITH_GOOGLE } from "../../graphql/Mutations";
+import { IS_VERIFIED } from "../../graphql/Queries";
 
 type GoogleResponse = GoogleLoginResponse | GoogleLoginResponseOffline;
 
@@ -18,32 +20,6 @@ type GoogleErrorResponse = {
   error: string;
   details: string;
 };
-
-const LOGIN = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      id
-      firstName
-      lastName
-      email
-      role
-      accessToken
-    }
-  }
-`;
-
-const LOGIN_WITH_GOOGLE = gql`
-  mutation LoginWithGoogle($idToken: String!) {
-    loginWithGoogle(idToken: $idToken) {
-      id
-      firstName
-      lastName
-      email
-      role
-      accessToken
-    }
-  }
-`;
 
 const Login = (): React.ReactElement => {
   const { authenticatedUser, setAuthenticatedUser } = useContext(AuthContext);
@@ -56,7 +32,21 @@ const Login = (): React.ReactElement => {
     LOGIN_WITH_GOOGLE,
   );
 
+  const { data } = useQuery(IS_VERIFIED, {
+    skip: authenticatedUser === null,
+    variables: {
+      accessToken: authenticatedUser?.accessToken,
+      email: authenticatedUser?.email,
+    },
+  });
+  const isVerified = data?.isVerified;
+
   const onLogInClick = async () => {
+    if (!isVerified) {
+      window.alert(
+        "Failed to log in. Please check your email for a link to verify your account.",
+      );
+    }
     const user: AuthenticatedUser = await authAPIClient.login(
       email,
       password,
@@ -77,7 +67,7 @@ const Login = (): React.ReactElement => {
     setAuthenticatedUser(user);
   };
 
-  if (authenticatedUser) {
+  if (authenticatedUser && isVerified) {
     return <Redirect to={HOME_PAGE} />;
   }
 

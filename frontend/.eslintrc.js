@@ -26,7 +26,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
   ],
   rules: {
-    "prettier/prettier": ["warn", { endOfLine: "auto" }],
+    "prettier/prettier": ["error", { endOfLine: "auto" }],
     "react/require-default-props": "off",
     "react/no-array-index-key": "off",
     "jsx-a11y/click-events-have-key-events": "off",
