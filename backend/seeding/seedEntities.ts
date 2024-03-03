@@ -36,7 +36,7 @@ async function seedEntities(): Promise<void> {
 
   const entityData: Entity[] = [];
 
-  for (let i = 0; i < 2; i += 1) {
+  for (let i = 0; i < 10; i += 1) {
     const entity = createRandomEntity();
     entityData.push(entity);
   }
