@@ -1,12 +1,12 @@
-import { TaskDTO, CreateTaskDTO, UpdateTaskDTO } from "../../types";
 import TaskService from "../../services/implementations/taskService";
 import ITaskService from "../../services/interfaces/taskService";
+import { CreateTaskDTO, UpdateTaskDTO, TaskDTO } from "../../types";
 
 const taskService: ITaskService = new TaskService();
 
 const taskResolvers = {
   Query: {
-    task: async (
+    taskById: async (
       _parent: undefined,
       { id }: { id: string },
     ): Promise<TaskDTO> => {
@@ -21,7 +21,8 @@ const taskResolvers = {
       _parent: undefined,
       { task }: { task: CreateTaskDTO },
     ): Promise<TaskDTO> => {
-      return taskService.createTask(task);
+      const newTask = await taskService.createTask(task);
+      return newTask;
     },
     updateTask: async (
       _parent: undefined,
