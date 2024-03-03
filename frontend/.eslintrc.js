@@ -31,7 +31,6 @@ module.exports = {
     "react/no-array-index-key": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
-    "@typescript-eslint/no-useless-constructor": "off",
   },
-  ignorePatterns: ["build/*"],
+  ignorePatterns: ["build/*", ".eslintrc.js"],
 };
