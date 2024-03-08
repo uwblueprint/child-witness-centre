@@ -83,13 +83,12 @@ const DocumentDirectoryTable = () => {
           </Thead>
           <Tbody>
             {documents.map((document) => {
-              const isChecked = selectedDocumentIds.has(document.id);
               return (
                 <Tr key={document.id}>
                   <Td>
                     <Checkbox
                       id={document.id}
-                      isChecked={isChecked}
+                      isChecked={selectedDocumentIds.has(document.id)}
                       onChange={changeRowCheckbox}
                     />
                   </Td>
