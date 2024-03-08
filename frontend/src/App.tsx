@@ -12,6 +12,7 @@ import SimpleEntityCreatePage from "./components/pages/SimpleEntityCreatePage";
 import SimpleEntityDisplayPage from "./components/pages/SimpleEntityDisplayPage";
 import NotFound from "./components/pages/NotFound";
 import UpdatePage from "./components/pages/UpdatePage";
+import SimpleEntityUpdatePage from "./components/pages/SimpleEntityUpdatePage";
 import * as Routes from "./constants/Routes";
 import AUTHENTICATED_USER_KEY from "./constants/AuthConstants";
 import AuthContext from "./contexts/AuthContext";
@@ -79,6 +80,11 @@ const App = (): React.ReactElement => {
                 path={Routes.CREATE_SIMPLE_ENTITY_PAGE}
                 component={SimpleEntityCreatePage}
                 allowedRoles={new Set([UserRole.ADMIN])}
+              />
+              <PrivateRoute
+                exact
+                path={Routes.UPDATE_SIMPLE_ENTITY_PAGE}
+                component={SimpleEntityUpdatePage}
               />
               <PrivateRoute
                 exact
