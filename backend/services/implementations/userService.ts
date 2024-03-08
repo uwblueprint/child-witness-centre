@@ -254,10 +254,9 @@ class UserService implements IUserService {
     };
   }
 
-
   async updateUserRoleById(userId: string, newRole: Role): Promise<void> {
     try {
-      const user = await MgUser.findById(userId)
+      const user = await MgUser.findById(userId);
 
       if (!user) {
         throw new Error(`userId ${userId} not found.`);
@@ -266,15 +265,16 @@ class UserService implements IUserService {
       await MgUser.findByIdAndUpdate(
         userId,
         { role: newRole },
-        { runValidators: true }
+        { runValidators: true },
       );
-
     } catch (error: unknown) {
-      Logger.error(`Failed to update user role. Reason = ${getErrorMessage(error)}`);
+      Logger.error(
+        `Failed to update user role. Reason = ${getErrorMessage(error)}`,
+      );
       throw error;
     }
   }
-  
+
   async deleteUserById(userId: string): Promise<void> {
     try {
       const deletedUser: User | null = await MgUser.findByIdAndDelete(userId);
