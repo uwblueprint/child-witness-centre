@@ -31,7 +31,7 @@ const create = async ({
   formData,
 }: {
   formData: FormData;
-}): Promise<EntityResponse> => {
+}): Promise<EntityResponse | null> => {
   const bearerToken = `Bearer ${getLocalStorageObjProperty(
     AUTHENTICATED_USER_KEY,
     "accessToken",
@@ -42,11 +42,13 @@ const create = async ({
     });
     return data;
   } catch (error) {
-    return error as EntityResponse;
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 };
 
-const get = async (): Promise<EntityResponse[]> => {
+const get = async (): Promise<EntityResponse[] | null> => {
   const bearerToken = `Bearer ${getLocalStorageObjProperty(
     AUTHENTICATED_USER_KEY,
     "accessToken",
@@ -57,11 +59,13 @@ const get = async (): Promise<EntityResponse[]> => {
     });
     return data;
   } catch (error) {
-    return error as EntityResponse[];
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 };
 
-const getFile = async (uuid: string): Promise<string> => {
+const getFile = async (uuid: string): Promise<string | null> => {
   const bearerToken = `Bearer ${getLocalStorageObjProperty(
     AUTHENTICATED_USER_KEY,
     "accessToken",
@@ -73,11 +77,13 @@ const getFile = async (uuid: string): Promise<string> => {
 
     return data.fileURL;
   } catch (error) {
-    return error as string;
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 };
 
-const getCSV = async (): Promise<string> => {
+const getCSV = async (): Promise<string | null> => {
   const bearerToken = `Bearer ${getLocalStorageObjProperty(
     AUTHENTICATED_USER_KEY,
     "accessToken",
@@ -92,7 +98,9 @@ const getCSV = async (): Promise<string> => {
 
     return data;
   } catch (error) {
-    return error as string;
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 };
 
@@ -103,7 +111,7 @@ const update = async (
   }: {
     entityData: FormData;
   },
-): Promise<EntityResponse> => {
+): Promise<EntityResponse | null> => {
   const bearerToken = `Bearer ${getLocalStorageObjProperty(
     AUTHENTICATED_USER_KEY,
     "accessToken",
@@ -114,7 +122,9 @@ const update = async (
     });
     return data;
   } catch (error) {
-    return error as EntityResponse;
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 };
 

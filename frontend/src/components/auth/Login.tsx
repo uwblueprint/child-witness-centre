@@ -48,7 +48,7 @@ const Login = (): React.ReactElement => {
       login,
     );
     setAuthenticatedUser(user);
-    if (isVerified === false) {
+    if ((await isVerified) === false) {
       // eslint-disable-next-line no-alert
       window.alert(
         "Failed to log in. Please check your email for a link to verify your account.",
