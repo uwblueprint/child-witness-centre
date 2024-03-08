@@ -102,6 +102,7 @@ const register = async (
     });
     user = result.data?.register ?? null;
     if (user) {
+      // eslint-disable-next-line no-alert
       window.alert(
         "Success! Please check your email for a link to verify your account.",
       );
