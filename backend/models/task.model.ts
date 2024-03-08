@@ -20,7 +20,6 @@ const TaskSchema: Schema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   requiresApproval: {
     type: Boolean,
@@ -37,7 +36,6 @@ const TaskSchema: Schema = new Schema({
   },
   dueDate: {
     type: Date,
-    required: true,
   },
   expiry: {
     type: Date,
