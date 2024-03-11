@@ -43,7 +43,7 @@ const UserSchema: Schema = new Schema({
   locationType: {
     type: String,
     required: true,
-    enum: ["Remote", "Hybrid", "In Person"],
+    enum: ["Remote", "Hybrid", "InPerson"],
   },
   headshot: {
     type: String,

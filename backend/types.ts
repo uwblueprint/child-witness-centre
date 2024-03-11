@@ -1,6 +1,6 @@
 export type Role = "Volunteer" | "Staff" | "Admin";
 
-export type LocationType = "Remote" | "Hybrid" | "In Person";
+export type LocationType = "Remote" | "Hybrid" | "InPerson";
 
 export type Token = {
   accessToken: string;
