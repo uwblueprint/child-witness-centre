@@ -24,17 +24,18 @@ import sampleContextReducer from "./reducers/SampleContextReducer";
 import SampleContextDispatcherContext from "./contexts/SampleContextDispatcherContext";
 import EditTeamInfoPage from "./components/pages/EditTeamPage";
 import HooksDemo from "./components/pages/HooksDemo";
+import DocumentDirectory from "./components/pages/DocumentDirectory";
 
 import { AuthenticatedUser } from "./types/AuthTypes";
+import { UserRole } from "./types/UserTypes";
 
 const App = (): React.ReactElement => {
   const currentUser: AuthenticatedUser = getLocalStorageObj<AuthenticatedUser>(
     AUTHENTICATED_USER_KEY,
   );
 
-  const [authenticatedUser, setAuthenticatedUser] = useState<AuthenticatedUser>(
-    currentUser,
-  );
+  const [authenticatedUser, setAuthenticatedUser] =
+    useState<AuthenticatedUser>(currentUser);
 
   // Some sort of global state. Context API replaces redux.
   // Split related states into different contexts as necessary.
@@ -71,16 +72,24 @@ const App = (): React.ReactElement => {
                 exact
                 path={Routes.DISPLAY_ENTITY_PAGE}
                 component={DisplayPage}
+                allowedRoles={new Set([UserRole.ADMIN])}
               />
               <PrivateRoute
                 exact
                 path={Routes.CREATE_SIMPLE_ENTITY_PAGE}
                 component={SimpleEntityCreatePage}
+                allowedRoles={new Set([UserRole.ADMIN])}
               />
               <PrivateRoute
                 exact
                 path={Routes.UPDATE_SIMPLE_ENTITY_PAGE}
                 component={SimpleEntityUpdatePage}
+              />
+              <PrivateRoute
+                exact
+                path={Routes.DOCUMENT_DIRECTORY_PAGE}
+                component={DocumentDirectory}
+                allowedRoles={new Set([UserRole.ADMIN])}
               />
               <PrivateRoute
                 exact
