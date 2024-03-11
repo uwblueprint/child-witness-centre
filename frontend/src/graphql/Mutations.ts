@@ -13,19 +13,6 @@ export const LOGIN = gql`
   }
 `;
 
-export const LOGIN_WITH_GOOGLE = gql`
-  mutation LoginWithGoogle($idToken: String!) {
-    loginWithGoogle(idToken: $idToken) {
-      id
-      firstName
-      lastName
-      email
-      role
-      accessToken
-    }
-  }
-`;
-
 export const REGISTER = gql`
   mutation Signup_Register(
     $firstName: String!
