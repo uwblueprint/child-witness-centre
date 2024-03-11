@@ -1,5 +1,7 @@
 export type Role = "Volunteer" | "Staff" | "Admin";
 
+export type TaskStatus = "Pending" | "Completed" | "Approved";
+
 export type Token = {
   accessToken: string;
   refreshToken: string;
