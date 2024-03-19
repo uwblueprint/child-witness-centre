@@ -27,6 +27,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
     ? allowedRoles.has(authenticatedUser.role)
     : true;
   if (!userHasAllowedRole) {
+    // eslint-disable-next-line no-alert
     alert(
       "You don't have permission to access this page. Redirecting to home page.",
     );
