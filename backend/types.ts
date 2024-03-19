@@ -1,5 +1,7 @@
 export type Role = "Volunteer" | "Staff" | "Admin";
 
+export type LocationType = "Remote" | "Hybrid" | "InPerson";
+
 export type TaskStatus = "Pending" | "Completed" | "Approved";
 
 export type Token = {
@@ -13,6 +15,10 @@ export type UserDTO = {
   lastName: string;
   email: string;
   role: Role;
+  startDate?: Date;
+  birthday?: Date;
+  locationType?: LocationType;
+  headshot?: string;
 };
 
 export type CreateUserDTO = Omit<UserDTO, "id"> & { password: string };
