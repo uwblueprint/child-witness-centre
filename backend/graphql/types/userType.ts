@@ -61,6 +61,7 @@ const userType = gql`
   extend type Mutation {
     createUser(user: CreateUserDTO!): UserDTO!
     updateUser(id: ID!, user: UpdateUserDTO!): UserDTO!
+    updateUserRole(id: ID!, role: Role!): ID
     deleteUserById(id: ID!): ID
     deleteUserByEmail(email: String!): ID
   }

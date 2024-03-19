@@ -194,7 +194,7 @@ class UserService implements IUserService {
       // must explicitly specify runValidators when updating through findByIdAndUpdate
       oldUser = await MgUser.findByIdAndUpdate(
         userId,
-        { firstName: user.firstName, lastName: user.lastName, role: user.role },
+        { firstName: user.firstName, lastName: user.lastName },
         { runValidators: true },
       );
 
@@ -214,7 +214,6 @@ class UserService implements IUserService {
             {
               firstName: oldUser.firstName,
               lastName: oldUser.lastName,
-              role: oldUser.role,
             },
             { runValidators: true },
           );
@@ -240,8 +239,29 @@ class UserService implements IUserService {
       firstName: user.firstName,
       lastName: user.lastName,
       email: updatedFirebaseUser.email ?? "",
-      role: user.role,
+      role: oldUser.role,
     };
+  }
+
+  async updateUserRoleById(userId: string, newRole: Role): Promise<void> {
+    try {
+      const user = await MgUser.findById(userId);
+
+      if (!user) {
+        throw new Error(`userId ${userId} not found.`);
+      }
+      // must explicitly specify runValidators when updating through findByIdAndUpdate
+      await MgUser.findByIdAndUpdate(
+        userId,
+        { role: newRole },
+        { runValidators: true },
+      );
+    } catch (error: unknown) {
+      Logger.error(
+        `Failed to update user role. Reason = ${getErrorMessage(error)}`,
+      );
+      throw error;
+    }
   }
 
   async deleteUserById(userId: string): Promise<void> {
