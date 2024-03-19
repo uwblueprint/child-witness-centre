@@ -21,9 +21,10 @@ function createRandomEntity(): Entity {
 }
 
 async function seedEntities(): Promise<void> {
-  const uri =
-    "mongodb+srv://cwc:jEkj8yE3mOWeviIO@child-witness-centre.6c4i8ne.mongodb.net/";
-
+  const uri = process.env.MG_DATABASE_URL;
+  if (uri === undefined) {
+    return;
+  }
   const client = new MongoClient(uri, {
     useNewUrlParser: true,
     // useUnifiedTopology: true,
