@@ -30,7 +30,7 @@ const create = async ({
   formData,
 }: {
   formData: SimpleEntityRequest;
-}): Promise<SimpleEntityResponse> => {
+}): Promise<SimpleEntityResponse | null> => {
   const bearerToken = `Bearer ${getLocalStorageObjProperty(
     AUTHENTICATED_USER_KEY,
     "accessToken",
@@ -41,11 +41,13 @@ const create = async ({
     });
     return data;
   } catch (error) {
-    return error;
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 };
 
-const get = async (): Promise<SimpleEntityResponse[]> => {
+const get = async (): Promise<SimpleEntityResponse[] | null> => {
   const bearerToken = `Bearer ${getLocalStorageObjProperty(
     AUTHENTICATED_USER_KEY,
     "accessToken",
@@ -56,11 +58,13 @@ const get = async (): Promise<SimpleEntityResponse[]> => {
     });
     return data;
   } catch (error) {
-    return error;
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 };
 
-const getCSV = async (): Promise<string> => {
+const getCSV = async (): Promise<string | null> => {
   const bearerToken = `Bearer ${getLocalStorageObjProperty(
     AUTHENTICATED_USER_KEY,
     "accessToken",
@@ -74,7 +78,9 @@ const getCSV = async (): Promise<string> => {
     });
     return data;
   } catch (error) {
-    return error;
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 };
 
@@ -85,7 +91,7 @@ const update = async (
   }: {
     entityData: SimpleEntityRequest;
   },
-): Promise<SimpleEntityResponse> => {
+): Promise<SimpleEntityResponse | null> => {
   const bearerToken = `Bearer ${getLocalStorageObjProperty(
     AUTHENTICATED_USER_KEY,
     "accessToken",
@@ -100,7 +106,9 @@ const update = async (
     );
     return data;
   } catch (error) {
-    return error;
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 };
 

@@ -1,25 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import {
-  GoogleLogin,
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-} from "react-google-login";
 import { useMutation, useQuery } from "@apollo/client";
 
 import authAPIClient from "../../APIClients/AuthAPIClient";
 import { HOME_PAGE, SIGNUP_PAGE } from "../../constants/Routes";
 import AuthContext from "../../contexts/AuthContext";
 import { AuthenticatedUser } from "../../types/AuthTypes";
-import { LOGIN, LOGIN_WITH_GOOGLE } from "../../graphql/Mutations";
+import { LOGIN } from "../../graphql/Mutations";
 import { IS_VERIFIED } from "../../graphql/Queries";
-
-type GoogleResponse = GoogleLoginResponse | GoogleLoginResponseOffline;
-
-type GoogleErrorResponse = {
-  error: string;
-  details: string;
-};
 
 const Login = (): React.ReactElement => {
   const { authenticatedUser, setAuthenticatedUser } = useContext(AuthContext);
@@ -28,9 +16,6 @@ const Login = (): React.ReactElement => {
   const history = useHistory();
 
   const [login] = useMutation<{ login: AuthenticatedUser }>(LOGIN);
-  const [loginWithGoogle] = useMutation<{ loginWithGoogle: AuthenticatedUser }>(
-    LOGIN_WITH_GOOGLE,
-  );
 
   const { data } = useQuery(IS_VERIFIED, {
     skip: authenticatedUser === null,
@@ -42,29 +27,22 @@ const Login = (): React.ReactElement => {
   const isVerified = data?.isVerified;
 
   const onLogInClick = async () => {
-    if (!isVerified) {
-      window.alert(
-        "Failed to log in. Please check your email for a link to verify your account.",
-      );
-    }
     const user: AuthenticatedUser = await authAPIClient.login(
       email,
       password,
       login,
     );
     setAuthenticatedUser(user);
+    if ((await isVerified) === false) {
+      // eslint-disable-next-line no-alert
+      window.alert(
+        "Failed to log in. Please check your email for a link to verify your account.",
+      );
+    }
   };
 
   const onSignUpClick = () => {
     history.push(SIGNUP_PAGE);
-  };
-
-  const onGoogleLoginSuccess = async (idToken: string) => {
-    const user: AuthenticatedUser = await authAPIClient.loginWithGoogle(
-      idToken,
-      loginWithGoogle,
-    );
-    setAuthenticatedUser(user);
   };
 
   if (authenticatedUser && isVerified) {
@@ -100,22 +78,6 @@ const Login = (): React.ReactElement => {
             Log In
           </button>
         </div>
-        <GoogleLogin
-          clientId={process.env.REACT_APP_OAUTH_CLIENT_ID || ""}
-          buttonText="Login with Google"
-          onSuccess={(response: GoogleResponse): void => {
-            if ("tokenId" in response) {
-              onGoogleLoginSuccess(response.tokenId);
-            } else {
-              // eslint-disable-next-line no-alert
-              window.alert(response);
-            }
-          }}
-          onFailure={(error: GoogleErrorResponse) =>
-            // eslint-disable-next-line no-alert
-            window.alert(JSON.stringify(error))
-          }
-        />
       </form>
       <div>
         <button

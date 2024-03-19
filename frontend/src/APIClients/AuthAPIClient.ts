@@ -38,41 +38,6 @@ const login = async (
   return user;
 };
 
-type LoginWithGoogleFunction = (
-  options?:
-    | MutationFunctionOptions<
-        { loginWithGoogle: AuthenticatedUser },
-        OperationVariables
-      >
-    | undefined,
-) => Promise<
-  FetchResult<
-    { loginWithGoogle: AuthenticatedUser },
-    Record<string, unknown>,
-    Record<string, unknown>
-  >
->;
-
-const loginWithGoogle = async (
-  idToken: string,
-  loginFunction: LoginWithGoogleFunction,
-): Promise<AuthenticatedUser | null> => {
-  let user: AuthenticatedUser = null;
-  try {
-    const result = await loginFunction({
-      variables: { idToken },
-    });
-    user = result.data?.loginWithGoogle ?? null;
-    if (user) {
-      localStorage.setItem(AUTHENTICATED_USER_KEY, JSON.stringify(user));
-    }
-  } catch (e: unknown) {
-    // eslint-disable-next-line no-alert
-    window.alert("Failed to login");
-  }
-  return user;
-};
-
 type RegisterFunction = (
   options?:
     | MutationFunctionOptions<
@@ -102,6 +67,7 @@ const register = async (
     });
     user = result.data?.register ?? null;
     if (user) {
+      // eslint-disable-next-line no-alert
       window.alert(
         "Success! Please check your email for a link to verify your account.",
       );
@@ -178,4 +144,4 @@ const refresh = async (refreshFunction: RefreshFunction): Promise<boolean> => {
   return success;
 };
 
-export default { login, logout, loginWithGoogle, register, refresh };
+export default { login, logout, register, refresh };
