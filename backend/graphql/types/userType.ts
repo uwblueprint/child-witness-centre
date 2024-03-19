@@ -21,22 +21,22 @@ const userType = gql`
     firstName: String!
     lastName: String!
     email: String!
-    startDate: Date!
+    startDate: Date
     birthday: Date
     role: Role!
     locationType: LocationType
-    headshot: String!
+    headshot: String
   }
 
   input CreateUserDTO {
     firstName: String!
     lastName: String!
     email: String!
-    startDate: Date!
+    startDate: Date
     birthday: Date
     role: Role!
     locationType: LocationType
-    headshot: String!
+    headshot: String
     password: String!
   }
 
@@ -44,11 +44,11 @@ const userType = gql`
     firstName: String!
     lastName: String!
     email: String!
-    startDate: Date!
+    startDate: Date
     birthday: Date
     role: Role!
     locationType: LocationType
-    headshot: String!
+    headshot: String
   }
 
   extend type Query {

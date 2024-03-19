@@ -34,20 +34,16 @@ const UserSchema: Schema = new Schema({
   },
   startDate: {
     type: Date,
-    required: true,
   },
   birthday: {
     type: Date,
-    required: true,
   },
   locationType: {
     type: String,
-    required: true,
     enum: ["Remote", "Hybrid", "InPerson"],
   },
   headshot: {
     type: String,
-    required: true,
   },
 });
 
